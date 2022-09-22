@@ -1,12 +1,13 @@
 import './AvatarJsx.css';
 
-const AvatarJsx = () => {
-    const src = 'https://randomuser.me/api/portraits/lego/2.jpg'
+const AvatarJsx = ({id, color, component}) => {
 
-    return(
-        <picture style = {{color: 'red'}}>
-            <img src={src} alt='avatar'/>
-            Andres
+    const src = `https://randomuser.me/api/portraits/lego/${id}.jpg`
+
+    return (
+        <picture style={{ color: color }}>
+            <img src={src} alt='avatar' style={{width: 200}} />
+            { component }
         </picture>
     )
 }
