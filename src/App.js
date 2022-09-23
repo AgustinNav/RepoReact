@@ -8,9 +8,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <AvatarJsx id={1} color='red' component={<h1>Agus</h1>} />
-      <AvatarJsx id={2} color='blue' component={<h1>Kekita</h1>} />
-      <AvatarJsx id={3} color='green' component={<h1>Te amo</h1>} />
+      <AvatarJsx id={1} color='red' nombre={'Agus'} />
+      {/**  */}
     </div>
   );
 }

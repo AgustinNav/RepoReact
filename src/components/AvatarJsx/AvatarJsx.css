@@ -2,9 +2,11 @@ picture {
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 100px;
+    width: 230px;
     margin-bottom: 10px;
-}
+    flex-wrap: wrap;
+    align-items: center;
+}   
 
 img {
     border-radius: 50%;
