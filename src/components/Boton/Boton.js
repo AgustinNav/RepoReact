@@ -1,8 +1,8 @@
 import './Boton.css';
 
-const Boton = ({ titulo, color }) => {
+const Boton = ({ titulo, color , bkcolor, mrgL}) => {
     return (
-        <button className='button' style={{ backgroundColor: color }}>{titulo}</button>
+        <button className='button' style={{ backgroundColor: bkcolor, color: color, marginLeft: mrgL}}>{titulo}</button>
     );
 }
 

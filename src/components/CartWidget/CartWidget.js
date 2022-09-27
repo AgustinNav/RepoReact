@@ -1,8 +1,10 @@
+import './CartWidget.css';
+
+const logo = "./assets/carrito.png"
+
 const CartWidget = () => {
     return(
-        <div>
-            
-        </div>
+        <button><img src={logo} alt='Carrito' /></button>
     )
 }
 
