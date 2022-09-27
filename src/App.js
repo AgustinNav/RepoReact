@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+import React from 'react';
 import './App.css';
 //import AvatarJsx from './components/AvatarJsx/AvatarJsx';
 import Navbar from './components/Navbar/Navbar';
@@ -9,7 +8,6 @@ import ItemListContainer from './components/ItemListContainer/ItemListCotainer';
 function App() {
   return (
     <div className="App">
-      <ChakraProvider>
         <Navbar>
           <Boton mrgL={50} titulo={'Tienda X'} color={'white'} bkcolor={'black'} />
           <Boton mrgL={"20vw"} titulo={'Producto 1'} color={'black'} bkcolor={'white'} />
@@ -19,9 +17,6 @@ function App() {
         </Navbar>
 
         <ItemListContainer titulo={'Bienvenidos a Tienda X!'}/>
-        
-      </ChakraProvider>
-
 
     </div>
   );

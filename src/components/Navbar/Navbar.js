@@ -5,6 +5,7 @@ const Navbar = ({children}) => {
     return (
         <nav>
             {children}
+            <CartWidget/>
         </nav>
     );
 }
