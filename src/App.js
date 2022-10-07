@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
-import AvatarJsx from './components/AvatarJsx/AvatarJsx';
 import Navbar from './components/Navbar/Navbar';
 import Boton from './components/Boton/Boton';
 import ItemListContainer from './components/ItemListContainer/ItemListCotainer';
-import ItemCount from './components/ItemCount/ItemCount';
-import Effect from './components/Effect/Effect';
 
 function App() {
 
-  const [show, setShow] = useState(true);
 
   return (
     <div className="App">
@@ -25,10 +21,8 @@ function App() {
       <ItemListContainer titulo={'Listado de productos'} />
 
       
-      {/**
-      <button onClick={() => setShow(!show)}> Show / Hide </button>
-      {show ? <Effect /> : null}
-      */}
+      
+    
     </div>
   );
 }
