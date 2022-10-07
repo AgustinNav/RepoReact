@@ -12,10 +12,6 @@ function App() {
 
   const [show, setShow] = useState(true);
 
-  const handleonAdd = (count) => {
-      console.log("Se añadio un item al carrito")
-  }
-
   return (
     <div className="App">
       <Navbar>
@@ -26,9 +22,9 @@ function App() {
         <Boton mrgL={50} titulo={'Producto 4'} color={'black'} bkcolor={'white'} />
       </Navbar>
 
-      <ItemListContainer titulo={'Bienvenidos a Tienda X!'} />
+      <ItemListContainer titulo={'Listado de productos'} />
 
-      <ItemCount onAdd={handleonAdd} />
+      
       {/**
       <button onClick={() => setShow(!show)}> Show / Hide </button>
       {show ? <Effect /> : null}

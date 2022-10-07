@@ -1,10 +1,9 @@
 import './ItemCount.css'
 import { useState, useEffect } from 'react'
 
-const ItemCount = ({onAdd}) => {
+const ItemCount = ({onAdd, stock}) => {
 
     const [count, setResult] = useState(1)
-    const [stock, setStock] = useState(5)
 
     const sumar = () => {
         if (count < stock) {
@@ -21,13 +20,12 @@ const ItemCount = ({onAdd}) => {
         <div>
             <div>
                 <button onClick={restar}>-</button>
-                <p>    {count}    </p>
+                {count}
                 <button onClick={sumar}>+</button>
             </div>
             <div>
-                <button onClick={stock!=0 ? onAdd : null}>Agregar al carrito</button>
+                <button onClick={stock != 0 ? onAdd : null}>Agregar al carrito</button>
             </div>
-            <p>Stock = </p><input value={stock} onChange={(e) => setStock(e.target.value)} />
         </div>
     )
 }
