@@ -1,5 +1,6 @@
 import ItemCount from '../ItemCount/ItemCount'
 import './ItemDetail.css'
+import { NavLink } from 'react-router-dom'
 
 const ItemDetail = ({product, onAdd}) => {
 
