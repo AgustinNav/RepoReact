@@ -8,10 +8,6 @@ const ItemListContainer = ({ titulo }) => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const handleonAdd = () => {
-        console.log("Se añadio un item al carrito")
-    }
-
     useEffect(() => {
         getProducts().then(response => {
             setProducts(response)
@@ -27,7 +23,7 @@ const ItemListContainer = ({ titulo }) => {
     return (
         <div>
             <h1>{titulo}</h1>
-            <ItemList products={products} onAdd={handleonAdd}/>
+            <ItemList products={products}/>
         </div>
     )
 }

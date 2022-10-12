@@ -3,7 +3,7 @@ import CartWidget from '../CartWidget/CartWidget.js'
 
 const Navbar = ({children}) => {
     return (
-        <nav>
+        <nav className='NavBar'>
             {children}
             <CartWidget/>
         </nav>

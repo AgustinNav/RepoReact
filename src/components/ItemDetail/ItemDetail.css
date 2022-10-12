@@ -1,0 +1,17 @@
+.cardDetail {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: auto;
+    margin: 20px;
+    border: 2px red dotted;
+    border-radius: 30%;
+    box-shadow: red 3px 3px 5px;
+}
+
+.cardDetail img{
+    border-radius: 40%;
+}
