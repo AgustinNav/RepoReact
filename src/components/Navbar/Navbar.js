@@ -10,11 +10,13 @@ const Navbar = () => {
             </NavLink>
 
             <div className='Categorias'>
-                {/* No utilizo <link> ya que react tira error y aun no descubro por que :c */}
-                <NavLink to={'/category/Celular'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Celulares</NavLink><NavLink to={'/category/Reloj'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Relojes</NavLink><NavLink to={'/category/Notebook'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Notebooks</NavLink>
+                <NavLink to={'/category/Celular'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Celulares</NavLink>
+                <NavLink to={'/category/Reloj'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Relojes</NavLink>
+                <NavLink to={'/category/Notebook'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Notebooks</NavLink>
+                <NavLink to={'/contacto'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Contactanos</NavLink>
             </div>
 
-            <CartWidget />
+            <CartWidget/>
         </nav>
     );
 }

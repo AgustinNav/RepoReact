@@ -1,17 +1,32 @@
-import ItemCount from '../ItemCount/ItemCount'
 import './ItemDetail.css'
-import { NavLink } from 'react-router-dom'
+import ItemCount from '../ItemCount/ItemCount'
+import { useState } from 'react'
+import FinalizarCompra from '../FinzalizarCompra/FinzalizarCompra'
+import { useContext } from 'react'
+import { CartContext } from '../../context/CartContext.js'
 
-const ItemDetail = ({product, onAdd}) => {
+const ItemDetail = ({ id, name, img, description, price, stock}) => {
+    const [count, setCount] = useState(0)
+
+    const { addItem } = useContext(CartContext)
+
+    const handleonAdd = (quantity) => {
+        setCount(quantity)
+        const productToAdd = {
+            id, name, price, quantity
+        }
+        addItem(productToAdd)
+    }
 
     return (
         <div>
             <div className="cardDetail">
-                <img src={product.img} alt={product.name} style={{ width: 200 }} />
-                <h1>{product.name}</h1>
-                <h3>Precio: <strong>{product.price}</strong></h3>
-                <p>{product.description}</p>
-                <ItemCount stock={product.stock} onAdd={onAdd} />
+                <img src={img} alt={name} style={{ width: 200 }} />
+                <h1>{name}</h1>
+                <h3>Precio: <strong>{price}</strong></h3>
+                <p>{description}</p>
+                <p>Stock: {stock}</p>
+                {count === 0 ? <ItemCount onAdd={handleonAdd} stock={stock}/> : <FinalizarCompra/>}
             </div>
         </div>
     )

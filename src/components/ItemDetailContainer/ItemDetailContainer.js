@@ -5,19 +5,15 @@ import ItemDetail from '../ItemDetail/ItemDetail';
 import { useParams } from 'react-router-dom';
 
 const ItemDetailContainer = () => {
-
+    
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
 
     const {productId} = useParams()
 
-    const handleonAdd = () => {
-        console.log("Se añadio un item al carrito")
-    }
-
     useEffect(() => {
-        getProductById(productId).then(response => {
-            setProduct(response)
+        getProductById(productId).then(product => {
+            setProduct(product)
         }).finally(() => {
             setLoading(false)
         })
@@ -30,7 +26,7 @@ const ItemDetailContainer = () => {
     return (
         <div className='ItemDetailContainer'>
             <h1>Detalles: </h1>
-            <ItemDetail product={product} onAdd={handleonAdd}/>
+            <ItemDetail {...product} />
         </div>
     )
 }

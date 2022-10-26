@@ -1,0 +1,14 @@
+.ItemCount{
+    margin: 10px;
+}
+
+.ItemCount input{
+    text-align: center;
+    width: 50px;
+    margin: 0px 5px 0px 5px;
+}
+
+.button1{
+    text-align: center;
+    width: 20px;
+}

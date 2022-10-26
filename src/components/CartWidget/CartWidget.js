@@ -1,9 +1,17 @@
 import './CartWidget.css';
 import img from './assets/carrito.png'
+import { useContext } from 'react';
+import { CartContext } from '../../context/CartContext.js';
 
 const CartWidget = () => {
+
+    const { totalQuantity } = useContext(CartContext)
+
     return(
-        <button className='CartWidget'><img src={img} alt='Carrito' /></button>
+        <div className='CartWidget'>
+            <img src={img} alt='Carrito'/>
+            {totalQuantity}
+        </div>
     )
 }
 

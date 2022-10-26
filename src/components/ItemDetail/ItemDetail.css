@@ -1,6 +1,5 @@
 .cardDetail {
     display: flex;
-    padding: 20px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -8,10 +7,10 @@
     height: auto;
     margin: 20px;
     border: 2px red dotted;
-    border-radius: 30%;
-    box-shadow: red 3px 3px 5px;
+    border-radius: 80px;
+    box-shadow: rgba(255, 0, 0, 0.514) 3px 3px 5px;
 }
 
 .cardDetail img{
-    border-radius: 40%;
+    border-radius: 30px;
 }
