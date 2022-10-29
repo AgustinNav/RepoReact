@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './ItemListContainer.css';
 import { getProducts, getProductsByCategory } from '../../asyncMock'
 import ItemList from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom';
+import { NotificacionContext } from '../../Notificacion/NotificacionService'
 
 const ItemListContainer = ({ titulo }) => {
 
@@ -11,6 +12,8 @@ const ItemListContainer = ({ titulo }) => {
 
     const { categoryId } = useParams()
 
+    const { setNotificacion } = useContext(NotificacionContext)
+
     useEffect(() => {
         setLoading(true)
 
@@ -18,6 +21,8 @@ const ItemListContainer = ({ titulo }) => {
 
         asyncFunction(categoryId).then(response => {
             setProducts(response)
+        }).catch(error => {
+            setNotificacion('error', error)
         }).finally(() => {
             setLoading(false)
         })

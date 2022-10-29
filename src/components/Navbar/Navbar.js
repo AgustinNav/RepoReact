@@ -16,7 +16,7 @@ const Navbar = () => {
                 <NavLink to={'/contacto'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Contactanos</NavLink>
             </div>
 
-            <CartWidget/>
+            <NavLink to={'/cart'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}><CartWidget/></NavLink>
         </nav>
     );
 }
