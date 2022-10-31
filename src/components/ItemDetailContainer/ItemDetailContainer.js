@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './ItemDetailContainer.css';
-import { getProductById } from '../../asyncMock'
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { useParams, useNavigate } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
 const ItemDetailContainer = () => {
     
@@ -14,11 +15,19 @@ const ItemDetailContainer = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getProductById(productId).then(product => {
-            setProduct(product)
-        }).finally(() => {
+
+        const docRef = doc(db, 'productos', productId)
+
+        getDoc(docRef).then(response => {
+            console.log(response)
+
+            const data = response.data()
+
+            const productoAdaptado = {id: response.id, ...data}
+            setProduct(productoAdaptado)
             setLoading(false)
         })
+
     }, [productId])
 
     if (loading) {

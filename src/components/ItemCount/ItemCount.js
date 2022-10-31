@@ -20,18 +20,21 @@ const ItemCount = ({ onAdd, stock }) => {
     return (
         <div className='ItemCount'>
             <div>
-                <button className='button1' onClick={restar}>-</button>
+                <button onClick={() => onAdd(quantity)}>Agregar al carrito</button>
+            </div>
+            <div className='flechas'>
+                <button className='button1' onClick={sumar}>🡡</button>
                 <input onChange={(e) => {
-                    if (e.target.value <= stock)
-                    {
+                    if (e.target.value == "") {
+                        setQuantity(0)
+                        e.target.value = 0
+                    } else if (e.target.value <= stock) {
                         setQuantity(parseInt(e.target.value))
-                    } 
+                        console.log(e.target.value)
+                    }
                 }
                 } value={quantity} />
-                <button className='button1' onClick={sumar}>+</button>
-            </div>
-            <div>
-                <button onClick={() => onAdd(quantity)}>Agregar al carrito</button>
+                <button className='button1' onClick={restar}>🡣</button>
             </div>
         </div>
     )

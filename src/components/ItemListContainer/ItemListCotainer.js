@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import './ItemListContainer.css';
-import { getProducts, getProductsByCategory } from '../../asyncMock'
 import ItemList from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom';
 import { NotificacionContext } from '../../Notificacion/NotificacionService'
+import { getDocs, collection, query, where} from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
 const ItemListContainer = ({ titulo }) => {
 
@@ -17,10 +18,22 @@ const ItemListContainer = ({ titulo }) => {
     useEffect(() => {
         setLoading(true)
 
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        const collectionRef =  categoryId 
+        ? query(collection(db, 'productos'), where('category', '==', categoryId )) 
+        : collection(db, 'productos')
 
-        asyncFunction(categoryId).then(response => {
-            setProducts(response)
+        getDocs(collectionRef).then(response => {
+            console.log(response)
+            const productosAdaptados = response.docs.map(doc => {
+                const data = doc.data()
+                console.log(data)
+
+                return { id: doc.id, ...data}
+            })
+
+            console.log(productosAdaptados)
+            setProducts(productosAdaptados)
+
         }).catch(error => {
             setNotificacion('error', error)
         }).finally(() => {

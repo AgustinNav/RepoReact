@@ -1,8 +1,14 @@
 import './Navbar.css';
 import CartWidget from '../CartWidget/CartWidget.js'
 import { NavLink } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
+import { useContext } from 'react';
 
 const Navbar = () => {
+
+    const { totalQuantity } = useContext(CartContext)
+
+
     return (
         <nav className='NavBar'>
             <NavLink to={'/'} className='Opcion-home'>
@@ -16,7 +22,8 @@ const Navbar = () => {
                 <NavLink to={'/contacto'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}>Contactanos</NavLink>
             </div>
 
-            <NavLink to={'/cart'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}><CartWidget/></NavLink>
+            { totalQuantity != 0 ? <NavLink to={'/cart'} className={({ isActive }) => isActive ? 'OpcionActiva' : 'Opcion'}><CartWidget/></NavLink> : <div className='tapa'/>}
+
         </nav>
     );
 }

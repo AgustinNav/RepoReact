@@ -1,14 +1,30 @@
-.ItemCount{
+.ItemCount {
+    display: flex;
     margin: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .ItemCount input{
     text-align: center;
-    width: 50px;
+    width: 46px;
     margin: 0px 5px 0px 5px;
 }
 
 .button1{
     text-align: center;
-    width: 20px;
+    width: 50px;
+}
+
+.flechas {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
