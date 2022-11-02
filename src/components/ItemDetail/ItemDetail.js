@@ -27,7 +27,13 @@ const ItemDetail = ({ id, name, img, description, price, stock }) => {
                 <h3>Precio: <strong>{price}</strong></h3>
                 <p>{description}</p>
                 <p>Stock: {stock}</p>
-                {!isInCart(id) ? <ItemCount onAdd={handleonAdd} stock={stock} /> : <FinalizarCompra />}
+                {
+                    stock === 0
+                        ? <h2>No hay stock :c</h2>
+                        : !isInCart(id)
+                            ? <ItemCount onAdd={handleonAdd} stock={stock} />
+                            : <FinalizarCompra />
+                }
             </div>
         </div>
     )

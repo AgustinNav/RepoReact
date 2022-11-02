@@ -30,7 +30,6 @@ const ItemCount = ({ onAdd, stock }) => {
                         e.target.value = 0
                     } else if (e.target.value <= stock) {
                         setQuantity(parseInt(e.target.value))
-                        console.log(e.target.value)
                     }
                 }
                 } value={quantity} />

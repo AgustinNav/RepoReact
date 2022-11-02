@@ -11,8 +11,6 @@ const CartProvider = ({ children }) => {
 
     const { setNotificacion } = useContext(NotificacionContext)
 
-    console.log('cart:', cart)
-
     const addItem = (productToAdd) => {
         if (!isInCart(productToAdd)) {
             setCart([...cart, productToAdd])

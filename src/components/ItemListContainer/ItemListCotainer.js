@@ -23,15 +23,11 @@ const ItemListContainer = ({ titulo }) => {
         : collection(db, 'productos')
 
         getDocs(collectionRef).then(response => {
-            console.log(response)
             const productosAdaptados = response.docs.map(doc => {
                 const data = doc.data()
-                console.log(data)
 
                 return { id: doc.id, ...data}
             })
-
-            console.log(productosAdaptados)
             setProducts(productosAdaptados)
 
         }).catch(error => {

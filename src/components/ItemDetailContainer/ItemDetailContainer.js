@@ -19,7 +19,6 @@ const ItemDetailContainer = () => {
         const docRef = doc(db, 'productos', productId)
 
         getDoc(docRef).then(response => {
-            console.log(response)
 
             const data = response.data()
 
