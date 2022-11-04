@@ -1,17 +1,18 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../../context/CartContext"
-import { NotificacionContext } from "../../Notificacion/NotificacionService"
-import { addDoc, collection, getDocs, query, where, documentId, docs, writeBatch } from "firebase/firestore"
-import { db } from "../../services/firebase"
+import { NotificationContext } from "../../Notification/NotificationService"
 import './Checkout.css'
 import { useNavigate } from "react-router-dom"
+
+import { createOrder } from '../../services/firestore/order';
+
 
 import Form from "../Form/Form"
 
 const Checkout = () => {
 
     const { cart, totalPrice, clearCart } = useContext(CartContext)
-    const { setNotificacion } = useContext(NotificacionContext)
+    const { setNotification } = useContext(NotificationContext)
     const [name, setName] = useState("")
     const [phone, setPhone] = useState("")
     const [mail, setMail] = useState("")
@@ -19,74 +20,31 @@ const Checkout = () => {
 
     const navigate = useNavigate()
 
-    const createOrder = async () => {
+    const objOrder = {
+        buyer: {
+            name,
+            phone,
+            mail
+        },
+        items: cart,
+        totalPrice
+    }
 
-        setLoading(true)
+    const newOrder = () => {
 
-        try {
-
-            const objOrder = {
-                buyer: {
-                    name,
-                    phone,
-                    mail
-                },
-                items: cart,
-                totalPrice
-            }
-
-            const batch = writeBatch(db)
-
-            const outOfStock = []
-
-            const ids = cart.map(prod => prod.id)
-            const productosRef = collection(db, 'productos')
-
-            const productosAddedFromFirestore = await getDocs(query(productosRef, where(documentId(), 'in', ids)))
-
-            const { docs } = productosAddedFromFirestore
-
-            docs.forEach(doc => {
-                const dataDoc = doc.data()
-                const stockDb = dataDoc.stock
-
-                const productoAddedToCart = cart.find(prod => prod.id === doc.id)
-                const prodQuantity = productoAddedToCart?.quantity
-
-                if (stockDb >= prodQuantity) {
-
-                    batch.update(doc.ref, { stock: stockDb - prodQuantity })
-
-                } else {
-
-                    outOfStock.push({ id: doc.id, ...dataDoc })
-
-                }
-            })
-
-            if (outOfStock.length === 0) {
-
-                await batch.commit()
-
-                const ordersRef = collection(db, 'orders')
-
-                const orderAdded = await addDoc(ordersRef, objOrder)
-
+        createOrder(objOrder, cart)
+            .then((orderId) => {
                 setLoading(false)
-                setNotificacion('success', `Orden generada! El id de su orden es ${orderAdded.id}`)
+                setNotification('success', `Orden generada! El id de su orden es ${orderId}`)
                 clearCart()
 
                 setTimeout(() => {
                     navigate('/')
                 }, 1500)
-
-            } else {
-                setNotificacion('error', 'Hay productos sin stock en su compra!')
-            }
-
-        } catch (error) {
-            setNotificacion('error', error)
-        }
+            })
+            .catch(error => {
+                setNotification('error', error)
+            })
 
     }
 
@@ -101,11 +59,15 @@ const Checkout = () => {
 
     return (
         <div className="Checkout">
-            <h1>Formulario de compra</h1>
 
-            <Form setName={setName} setPhone={setPhone} setMail={setMail}/>
+            {/*Se me presentaron inconveneintes a la hora de unificar el boton de generar orden con el Form ya que no se como se utiliza el onClick en un intup submit*/}
 
-            {cart.length != 0 ? <button onClick={() => createOrder()}>Generar orden</button> : <h1>Su carrito esta vacio, no hay nada que comprar</h1>}
+            <Form setName={setName} setPhone={setPhone} setMail={setMail} newOrder={newOrder} />
+            {
+                cart.length !== 0
+                    ? <button onClick={() => newOrder()}>Generar orden</button>
+                    : <h1>Su carrito esta vacio, no hay nada que comprar</h1>
+            }
 
         </div>
     )

@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react';
 import './ItemDetailContainer.css';
+import { useEffect, useState } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { useParams, useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../services/firebase';
+import { getProduct } from '../../services/firestore/products';
 
 const ItemDetailContainer = () => {
-    
+
     const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const {productId} = useParams()
+    const { productId } = useParams()
 
     const navigate = useNavigate()
 
     useEffect(() => {
 
-        const docRef = doc(db, 'productos', productId)
-
-        getDoc(docRef).then(response => {
-
-            const data = response.data()
-
-            const productoAdaptado = {id: response.id, ...data}
-            setProduct(productoAdaptado)
-            setLoading(false)
-        })
+        getProduct(productId)
+            .then(product => {
+                setProduct(product)
+            })
+            .catch(error => {
+                console.log(error)
+            }).finally(() => {
+                setLoading(false)
+            })
 
     }, [productId])
 

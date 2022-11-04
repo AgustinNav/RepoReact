@@ -1,9 +1,9 @@
 import { useState, createContext } from "react";
 
-export const NotificacionContext = createContext()
+export const NotificationContext = createContext()
 
-const Notificaciones = ({ mensaje, severidad }) => {
-    const notificacionesStyles = {
+const Notificationes = ({ mensaje, severidad }) => {
+    const NotificationesStyles = {
         position: 'absolute',
         top: 100,
         right: 10,
@@ -17,17 +17,17 @@ const Notificaciones = ({ mensaje, severidad }) => {
     if (mensaje === '') return
 
     return (
-        <div style={notificacionesStyles}>
+        <div style={NotificationesStyles}>
             {mensaje}
         </div>
     )
 }
 
-export const NotificacionProvider = ({ children }) => {
+export const NotificationProvider = ({ children }) => {
     const [mensaje, setMensaje] = useState('')
     const [severidad, setSeveridad] = useState('success')
 
-    const setNotificacion = (severidad, mensaje) => {
+    const setNotification = (severidad, mensaje) => {
         setMensaje(mensaje)
         setSeveridad(severidad)
 
@@ -37,10 +37,10 @@ export const NotificacionProvider = ({ children }) => {
     }
 
     return (
-        <NotificacionContext.Provider value={{ setNotificacion }}>
-            <Notificaciones severidad={severidad} mensaje={mensaje} />
+        <NotificationContext.Provider value={{ setNotification }}>
+            <Notificationes severidad={severidad} mensaje={mensaje} />
             {children}
-        </NotificacionContext.Provider>
+        </NotificationContext.Provider>
     )
 }
 

@@ -5,9 +5,6 @@ import { CartContext } from "../../context/CartContext";
 const CartItem = ({ id, name, price, quantity, removeItem }) => {
 
     return (
-
-
-        
         <div>
             <div className="CartItem">
                 <h1>{name}</h1>

@@ -3,12 +3,12 @@ import ItemCount from '../ItemCount/ItemCount'
 import { useContext } from 'react'
 import FinalizarCompra from '../FinzalizarCompra/FinzalizarCompra'
 import { CartContext } from '../../context/CartContext.js'
-import { NotificacionContext } from '../../Notificacion/NotificacionService'
+import { NotificationContext } from '../../Notification/NotificationService'
 
 const ItemDetail = ({ id, name, img, description, price, stock }) => {
 
     const { addItem, isInCart } = useContext(CartContext)
-    const { setNotificacion } = useContext(NotificacionContext)
+    const { setNotification } = useContext(NotificationContext)
 
     const handleonAdd = (quantity) => {
         const productToAdd = {
@@ -16,7 +16,7 @@ const ItemDetail = ({ id, name, img, description, price, stock }) => {
         }
 
         addItem(productToAdd)
-        setNotificacion('success', `Se añadio correctamente ${quantity} ${name}`)
+        setNotification('success', `Se añadio correctamente ${quantity} ${name}`)
     }
 
     return (

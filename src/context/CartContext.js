@@ -1,5 +1,5 @@
 import { useState, createContext, useContext, useEffect } from 'react';
-import { NotificacionContext } from '../Notificacion/NotificacionService';
+import { NotificationContext } from '../Notification/NotificationService';
 
 export const CartContext = createContext()
 
@@ -9,22 +9,23 @@ const CartProvider = ({ children }) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
 
-    const { setNotificacion } = useContext(NotificacionContext)
+    const { setNotification } = useContext(NotificationContext)
 
     const addItem = (productToAdd) => {
         if (!isInCart(productToAdd)) {
             setCart([...cart, productToAdd])
         } else {
-            setNotificacion('error',"Ya se encuentra en el carrito. Para cambiar la cantidad, elimine el producto y vuelva a agregarlo")
+            setNotification('error', "Ya se encuentra en el carrito. Para cambiar la cantidad, elimine el producto y vuelva a agregarlo")
         }
     }
 
     useEffect(() => {
         updateTotalQuantity()
         updateTotalPrice()
-    },[cart] )
+    }, [cart])
 
     const updateTotalQuantity = () => {
+
         let count = 0
         cart.forEach(prod => {
             count += prod.quantity
@@ -34,11 +35,12 @@ const CartProvider = ({ children }) => {
     }
 
     const updateTotalPrice = () => {
+
         let total = 0
         cart.forEach(prod => {
             total += prod.quantity * prod.price
         })
-        
+
         setTotalPrice(total)
     }
 
@@ -57,7 +59,7 @@ const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider value={{ clearCart, cart, addItem, removeItem, totalQuantity, isInCart, totalPrice }}>
-            { children }
+            {children}
         </CartContext.Provider >
     )
 
